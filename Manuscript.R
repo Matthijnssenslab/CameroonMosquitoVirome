@@ -23,13 +23,14 @@ plot_abundance <- function (obj, n, norm = TRUE, log = TRUE, fun = sd, rowclust 
   Heatmap(mat3, clustering_distance_columns = vegdist(mat4, method = colclust), clustering_distance_rows = vegdist(mat3, method = rowclust), ...)
 }
 
-setwd("~/Documents/MDKC Files/MOSCAM20/Manuscript MOS20/Manuscript2023/NGS/R/Inputs")
+#setwd("~/Documents/MDKC Files/MOSCAM20/Manuscript MOS20/Manuscript2023/NGS/R/Inputs")
+here::i_am("Manuscript.R")
 
 #' ***
 #' # Eukaryotic virome analysis
 #' ## Prepare the data
 #' ### Load the OTU table, taxonomy file and metadata into R
-OTU <- read.table ("moscam2020-abundance.tsv", header=TRUE, row.names=1, sep="\t", dec=".")
+OTU <- read.table ("Data/moscam2020-abundance.tsv", header=TRUE, row.names=1, sep="\t", dec=".")
 #' Information on OTU table 
 ncol(OTU) #Number of samples 
 nrow(OTU) #Number of contigs 
@@ -38,13 +39,13 @@ summary(colSums(OTU))
 sum(rowSums(OTU))   ## Total number of reads (abundance)
 sum(colSums(OTU))   ## Total number of reads (abundance)
 
-tax <- read.table("Tax_trimmed.tsv", header=T, row.names=1, sep="\t", dec=".")
+tax <- read.table("Data/MOS20tax_final.tsv", header=T, row.names=1, sep="\t", dec=".")
 #' Information on tax table 
 ncol(tax) 
 nrow(tax)
 
 #tax <- read.table("moscam2020-oldtaxfile.tsv", header=TRUE, row.names=1, sep="\t", dec=".")
-meta <- read.table("Metadata.csv", header=TRUE, row.names = 1, sep=";", dec=".")
+meta <- read.table("Data/Metadata.csv", header=TRUE, row.names = 1, sep=";", dec=".")
 
 #Shorten sample names 
 colnames(OTU) = gsub("[EBYaeud]*20_KC_","",colnames(OTU),fixed = F)
